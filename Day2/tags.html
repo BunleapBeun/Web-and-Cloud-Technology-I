@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta/Document Tags -->
+    <meta charset="UTF-8"> <!-- Specifies character encoding as UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design meta tag -->
+    <meta name="description" content="Demonstration of common HTML5 tags">
+    <link rel="stylesheet" href="../assets/styles/styles.css"> <!-- Links external CSS for styling -->
+    <title>HTML5 Tags Example</title>
+</head>
+<body>
+
+<!-- 1. New Structural/Sectioning Tags in HTML5 -->
+<header>
+    <h1>HTML5 Tags Overview</h1>
+    <!-- Navigation Section -->
+    <nav>
+        <ul>
+            <li><a href="#content">Main Content</a></li>
+            <li><a href="#media">Media Section</a></li>
+            <li><a href="#form">Forms</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Section 1: Article within Section -->
+    <section id="content">
+        <h2>Introduction to HTML5</h2>
+        <article>
+            <header>
+                <h3>Article Header</h3>
+                <p>
+                    <time datetime="2024-09-24">September 24, 2024</time>
+                </p> <!-- Represents date and time -->
+            </header>
+            <p>HTML5 introduces new structural tags such as
+                <mark>&lt;header&gt;</mark>
+                ,
+                <mark>&lt;footer&gt;</mark>
+                ,
+                <mark>&lt;section&gt;</mark>
+                , and
+                <mark>&lt;article&gt;</mark>
+                .
+            </p>
+        </article>
+    </section>
+
+    <!-- Section 2: Media Tags -->
+    <section id="media">
+        <h2>Media Content</h2>
+        <!-- Figure with Caption -->
+        <figure>
+            <img src="example-image.jpg" alt="Sample Image" width="300"> <!-- Image inside a figure tag -->
+            <figcaption>This is an image with a caption</figcaption> <!-- Caption for the image -->
+        </figure>
+
+        <!-- Audio Element -->
+        <audio controls>
+            <source src="example-audio.mp3" type="audio/mpeg"> <!-- Audio resource -->
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Video Element -->
+        <video controls width="400">
+            <source src="example-video.mp4" type="video/mp4"> <!-- Video resource -->
+            <track src="subtitles_en.vtt" kind="subtitles" srclang="en" label="English"> <!-- Subtitles -->
+            Your browser does not support the video tag.
+        </video>
+    </section>
+
+    <!-- Section 3: Forms -->
+    <section id="form">
+        <h2>HTML5 Form Elements</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required> <!-- Input field -->
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required> <!-- Email input -->
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob"> <!-- Date input -->
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender"> <!-- Dropdown select -->
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="colors">Choose a Color:</label>
+            <input list="colors" id="color" name="color"> <!-- Datalist for predefined input values -->
+            <datalist id="colors">
+                <option value="Red">
+                <option value="Blue">
+                <option value="Green">
+            </datalist>
+
+            <button type="submit">Submit</button> <!-- Button -->
+        </form>
+    </section>
+
+    <!-- Section 4: Interactive and Graphic Tags -->
+    <section>
+        <h2>Graphics and Interactivity</h2>
+
+        <!-- Canvas for drawing graphics -->
+        <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;"></canvas>
+        <script>
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = "blue";
+            ctx.fillRect(50, 50, 150, 100); <!-- Draw a blue rectangle -->
+        </script>
+
+        <!-- Interactive Details and Summary -->
+        <details>
+            <summary>More about HTML5</summary>
+            <p>HTML5 provides powerful APIs like Web Storage, Web Workers, and more.</p>
+        </details>
+
+        <!-- Marking text for emphasis -->
+        <p>HTML5 is
+            <mark>important</mark>
+            for modern web development.
+        </p>
+
+        <!-- Dialog Element -->
+        <dialog id="infoDialog">
+            <p>This is a dialog box!</p>
+            <button onclick="document.getElementById('infoDialog').close();">Close</button>
+        </dialog>
+        <button onclick="document.getElementById('infoDialog').showModal();">Open Dialog</button>
+    </section>
+</main>
+
+<!-- 1. Footer Section -->
+<footer>
+    <p>&copy; 2024 HTML5 Example Page</p>
+</footer>
+
+</body>
+</html>
