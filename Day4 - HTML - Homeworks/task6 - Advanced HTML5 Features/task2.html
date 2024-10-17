@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Offline Capable Webpage</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f4;
+                text-align: center;
+            }
+
+            header {
+                background-color: #4CAF50;
+                color: white;
+                padding: 20px 0;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Welcome to My Offline Webpage</h1>
+        </header>
+        <main>
+            <p>This webpage demonstrates how to use a service worker to cache content for offline access. You can
+                revisit this page even without an internet connection!</p>
+        </main>
+
+        <script>
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('data:application/javascript;charset=utf-8,' + encodeURIComponent(`
+                const CACHE_NAME = 'v1';
+                const CACHE_ASSETS = [
+                    '/',
+                    'data:application/javascript;charset=utf-8,' + encodeURIComponent(${JSON.stringify(document.documentElement.outerHTML)})
+                ];
+
+                self.addEventListener('install', (event) => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then((cache) => {
+                                console.log('Caching app shell');
+                                return cache.addAll(CACHE_ASSETS);
+                            })
+                    );
+                });
+
+                self.addEventListener('activate', (event) => {
+                    event.waitUntil(
+                        caches.keys().then((cacheNames) => {
+                            return Promise.all(
+                                cacheNames.map((name) => {
+                                    if (name !== CACHE_NAME) {
+                                        console.log('Deleting old cache:', name);
+                                        return caches.delete(name);
+                                    }
+                                })
+                            );
+                        })
+                    );
+                });
+
+                self.addEventListener('fetch', (event) => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then((response) => {
+                                return response || fetch(event.request);
+                            })
+                    );
+                });
+            `)).then(function (registration) {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    }).catch(function (error) {
+                        console.log('Service Worker registration failed:', error);
+                    });
+                });
+            }
+        </script>
+
+    </body>
+
+</html>

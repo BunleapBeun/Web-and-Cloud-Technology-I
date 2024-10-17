@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hobby Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hobby-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #0056b3;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="range"] {
+            width: 100px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hobby-section">
+        <h2>My Favorite Hobby: Photography</h2>
+
+        <!-- YouTube Video Embed -->
+        <div>
+            <iframe id="youtubeVideo" width="100%" height="315" src="https://www.youtube.com/embed/erEgovG9WBs?enablejsapi=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div>
+                <button onclick="playVideo()">Play</button>
+                <button onclick="pauseVideo()">Pause</button>
+                <input type="range" id="videoVolume" value="100" onchange="setVideoVolume(this.value)" />
+            </div>
+        </div>
+
+        <h3>Listen to My Favorite Track</h3>
+        <!-- Audio File Embed -->
+        <audio id="audioPlayer">
+            <source src="../../asset/audio/vannda_songkran.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div>
+            <button onclick="playAudio()">Play</button>
+            <button onclick="pauseAudio()">Pause</button>
+            <input type="range" id="audioVolume" value="100" onchange="setAudioVolume(this.value)" />
+        </div>
+    </div>
+
+    <script>
+        // YouTube video controls
+        let videoPlayer;
+
+        function onYouTubeIframeAPIReady() {
+            const videoIframe = document.getElementById('youtubeVideo');
+            videoPlayer = new YT.Player(videoIframe);
+        }
+
+        function playVideo() {
+            if (videoPlayer) videoPlayer.playVideo();
+        }
+
+        function pauseVideo() {
+            if (videoPlayer) videoPlayer.pauseVideo();
+        }
+
+        function setVideoVolume(volume) {
+            if (videoPlayer) videoPlayer.setVolume(volume);
+        }
+
+        // Audio controls
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        function playAudio() {
+            audioPlayer.play();
+        }
+
+        function pauseAudio() {
+            audioPlayer.pause();
+        }
+
+        function setAudioVolume(volume) {
+            audioPlayer.volume = volume / 100;
+        }
+    </script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+
+</html>

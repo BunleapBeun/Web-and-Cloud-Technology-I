@@ -1,23 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>HTML Form</title>
-</head>
-<body>
-<h1>User Registration Form</h1>
-<form>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required/><br/>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required/><br/>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>User Registration Form</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #e9ecef;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                /* Full height for centering */
+            }
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required/><br/>
+            form {
+                background-color: white;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                width: 400px;
+                /* Fixed width for the form */
+                transition: transform 0.2s;
+            }
 
-    <input type="submit" value="Register"/>
-</form>
-</body>
+            form:hover {
+                transform: scale(1.02);
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            label {
+                display: block;
+                margin-top: 15px;
+                font-weight: bold;
+                color: #555;
+            }
+
+            input {
+                width: calc(100% - 24px);
+                /* Full width minus padding */
+                padding: 12px;
+                margin-top: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+                transition: border 0.3s;
+            }
+
+            input:focus {
+                border-color: #4CAF50;
+                outline: none;
+            }
+
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                margin-top: 20px;
+                font-size: 16px;
+                padding: 12px;
+                border-radius: 4px;
+                transition: background-color 0.3s, transform 0.2s;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+                transform: translateY(-2px);
+            }
+
+            input[type="submit"]:active {
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <h1>User Registration</h1>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+
+            <input type="submit" value="Register" />
+        </form>
+
+        <script>
+            function validateForm() {
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Basic validation checks
+                if (username.length < 3) {
+                    alert('Username must be at least 3 characters long.');
+                    return false;
+                }
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address.');
+                    return false;
+                }
+                if (password.length < 6) {
+                    alert('Password must be at least 6 characters long.');
+                    return false;
+                }
+
+                // If all checks pass
+                alert('Registration successful!');
+                return true; // Allow form submission
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
+                return re.test(String(email).toLowerCase());
+            }
+        </script>
+
+    </body>
+
 </html>

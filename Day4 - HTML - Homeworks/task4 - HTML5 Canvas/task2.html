@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Drawing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #000;
+            background-color: #fff;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Basic Drawing App</h2>
+<p>Click and drag to draw on the canvas.</p>
+
+<canvas id="myCanvas" width="600" height="400"></canvas>
+<button id="clearBtn">Clear</button>
+
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    let painting = false;
+
+    // Start drawing
+    function startPosition(e) {
+        painting = true;
+        draw(e);
+    }
+
+    // End drawing
+    function endPosition() {
+        painting = false;
+        ctx.beginPath(); // Start a new path for the next drawing
+    }
+
+    // Draw on canvas
+    function draw(e) {
+        if (!painting) return;
+
+        ctx.lineWidth = 5; // Set the line width
+        ctx.lineCap = 'round'; // Set the line cap style
+        ctx.strokeStyle = 'black'; // Set the stroke color
+
+        // Get mouse position relative to the canvas
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        ctx.lineTo(x, y); // Draw a line to the mouse position
+        ctx.stroke(); // Apply the stroke
+        ctx.beginPath(); // Begin a new path for the next segment
+        ctx.moveTo(x, y); // Move to the current mouse position
+    }
+
+    // Event listeners for mouse actions
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    // Clear canvas
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+</script>
+
+</body>
+</html>
